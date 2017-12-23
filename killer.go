@@ -6,17 +6,43 @@ import (
 	"log"
 	"os"
 	"strconv"
+	"syscall"
+	"time"
 )
 
 const DEFAULT_INTERVAL = 1
 const DEFAULT_TIMEOUT = 30
 
 func killNicely(p *os.Process, interval int, timeout int) (bool, error) {
-	return true, nil
+	elapsed := 0
+
+	for {
+		res := p.Signal(syscall.SIGTERM)
+		if res == syscall.ESRCH {
+			return true, nil
+		} else if res == syscall.EPERM {
+			return false, res
+		} else if res == syscall.EINVAL {
+			return false, res
+		}
+
+		if elapsed >= timeout {
+			return false, nil
+		}
+
+		time.Sleep(time.Duration(interval))
+		elapsed += interval
+	}
 }
 
 func killNotSoNicely(p *os.Process) error {
-	return nil
+	res := p.Signal(syscall.SIGKILL)
+	// Successfully sent the signal or it's already stopped
+	if res == nil || res == syscall.ESRCH {
+		return nil
+	}
+
+	return res
 }
 
 func main() {
