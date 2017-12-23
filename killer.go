@@ -10,8 +10,10 @@ import (
 	"time"
 )
 
-const DEFAULT_INTERVAL = 1
-const DEFAULT_TIMEOUT = 30
+const (
+	DEFAULT_INTERVAL = 1
+	DEFAULT_TIMEOUT  = 30
+)
 
 func killNicely(p *os.Process, interval int, timeout int) (bool, error) {
 	elapsed := 0
