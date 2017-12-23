@@ -32,7 +32,7 @@ func killNicely(p *os.Process, interval int, timeout int) (bool, error) {
 			return false, nil
 		}
 
-		time.Sleep(time.Duration(interval))
+		time.Sleep(time.Duration(interval * 1000000000))
 		elapsed += interval
 	}
 }
