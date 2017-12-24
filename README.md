@@ -42,6 +42,10 @@ and OOM error.
 
 Hence: the behavior of `killer`.
 
+```
+java -XX:OnOutOfMemoryError='killer %p' ...
+```
+
 ## Building
 
 TBD
