@@ -23,8 +23,9 @@ timeout.
 Why does this exist? Why build a glorified version of the `kill` command? Some backstory...
 
 The Java Virtual Machine (JVM) has a flag to run a particular command when it encounters
-and out of memory condition (OOM). Some software, like ZooKeeper, recommends that you set
-the JVM to kill itself when it encounters an OOM error. The command looks something like
+and out of memory condition (OOM). Some distributed software, like ZooKeeper, recommends
+that you set the JVM to kill itself when it encounters an OOM error. The command looks
+something like...
 
 ```
 java -XX:OnOutOfMemoryError='kill -9 %p' ...
