@@ -35,7 +35,7 @@ The motivation for this is that when an `OutOfMemoryError` gets raised, you don'
 what random thread got killed and you can't be sure your application is still healthy.
 
 This works well for ZooKeeper since it's a mature and battle tested piece of software.
-You can be confident that your won't be corrupted or loss when you `kill -9` it.
+You can be confident that your data won't be corrupted or lost when you `kill -9` it.
 
 However, not all software is this robust. It'd be nice to give the application a chance
 to shutdown gracefully before resorting to `kill -9` when the application encounters
