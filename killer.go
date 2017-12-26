@@ -81,8 +81,7 @@ func main() {
 	flag.Parse()
 
 	if flag.NArg() < 1 {
-		log.Fatalf("PID is required\n")
-		os.Exit(1)
+		log.Fatal("PID is required")
 	}
 
 	pid, err := strconv.ParseInt(flag.Args()[0], 10, 32)
@@ -101,7 +100,9 @@ func main() {
 	}
 
 	if !stopped && !*disableKill {
-		killNotSoNicely(p)
+		if err := killNotSoNicely(p); err != nil {
+			log.Fatal(err)
+		}
 	} else if !stopped {
 		log.Fatalf("Failed to stop %d before timeout\n", pid)
 	}
