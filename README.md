@@ -18,6 +18,12 @@ timeout.
 
 `--disable-kill` Don't send a final `SIGKILL` after repeatedly sending `SIGTERM`
 
+Killer will exit with status code `0` if it was able to successfully stop a process. If
+the pid of a non-existent process is given, this will be treated as a success.
+
+It will exit with status code `1` if a signal could not be sent (due to permission errors)
+or if the process did not stop in time.
+
 ## Motivation
 
 Why does this exist? Why build a glorified version of the `kill` command? Some backstory...
