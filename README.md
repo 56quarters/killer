@@ -4,6 +4,8 @@ Repeatedly try to stop a process with `SIGTERM` and eventually `SIGKILL`.
 
 ## Usage
 
+### Arguments
+
 ```
 killer [--interval int] [--timeout int] [--disable-kill] [PID]
 ```
@@ -12,17 +14,19 @@ The `killer` command will repeatedly send a process (`PID`) the `SIGTERM` signal
 it stops and will finally send a `SIGKILL` if the process does not stop within the given
 timeout.
 
-`--interval int` How long to wait in between each `SIGTERM`, in seconds
+* `--interval int` How long to wait in between each `SIGTERM`, in seconds
+* `--timeout int` How long to wait total before sending a `SIGKILL`, in seconds
+* `--disable-kill` Don't send a final `SIGKILL` after repeatedly sending `SIGTERM`
+* `PID` Process ID to send signals to. Calling user must have permission to send signals
+  to this process. If the process does not exist, `killer` will immediately exit
+  successfully.
 
-`--timeout int` How long to wait total before sending a `SIGKILL`, in seconds
+### Exit Codes
 
-`--disable-kill` Don't send a final `SIGKILL` after repeatedly sending `SIGTERM`
-
-Killer will exit with status code `0` if it was able to successfully stop a process. If
-the pid of a non-existent process is given, this will be treated as a success.
-
-It will exit with status code `1` if a signal could not be sent (due to permission errors)
-or if the process did not stop in time.
+* `killer` will exit with status code `0` if it was able to successfully stop a process. If
+  the pid of a non-existent process is given, this will be treated as a success.
+* `killer` will exit with status code `1` if a signal could not be sent (due to permission
+  errors) or if the process did not stop in time.
 
 ## Motivation
 
