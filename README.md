@@ -59,4 +59,11 @@ java -XX:OnOutOfMemoryError='killer %p' ...
 
 ## Building
 
-TBD
+Killer is a basic Go project and doesn't require anything special to build, just the
+standard library.
+
+```
+git clone git@github.com:tshlabs/killer.git && cd killer
+go build
+./killer 1
+```
