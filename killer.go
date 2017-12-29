@@ -33,6 +33,11 @@ const (
 	DEFAULT_TIMEOUT  = 30
 )
 
+func processExists(p *os.Process) bool {
+	res := syscall.Kill(p.Pid, syscall.Signal(0))
+	return res == nil || res != syscall.ESRCH
+}
+
 func killNicely(p *os.Process, interval int, timeout int) (bool, error) {
 	elapsed := 0
 
@@ -92,6 +97,11 @@ func main() {
 	p, err := os.FindProcess(int(pid))
 	if err != nil {
 		log.Fatal(err)
+	}
+
+	// Exit with an error if this process doesn't even exist before we attempt to stop it
+	if !processExists(p) {
+		log.Fatalf("Process %d does not exist\n", pid)
 	}
 
 	stopped, err := killNicely(p, *interval, *timeout)

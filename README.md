@@ -19,14 +19,14 @@ timeout.
 * `--disable-kill` Don't send a final `SIGKILL` after repeatedly sending `SIGTERM`
 * `PID` Process ID to send signals to. Calling user must have permission to send signals
   to this process. If the process does not exist, `killer` will immediately exit
-  successfully.
+  with an error status.
 
 ### Exit Codes
 
-* `killer` will exit with status code `0` if it was able to successfully stop a process. If
-  the pid of a non-existent process is given, this will be treated as a success.
-* `killer` will exit with status code `1` if a signal could not be sent (due to permission
-  errors) or if the process did not stop in time.
+* `killer` will exit with status code `0` if it was able to successfully stop a process.
+* `killer` will exit with status code `1` if invalid input was supplied, if the process
+  does not exist, if a signal could not be sent (due to permission errors), or if the
+  process did not stop in time.
 
 ## Motivation
 
