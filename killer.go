@@ -76,7 +76,8 @@ func killNotSoNicely(p *os.Process) error {
 
 func main() {
 	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, "Usage: %s [options] [pid]\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "Usage: %s [options] [PID]\n\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "Repeatedly try to stop a process with SIGTERM and eventually SIGKILL\n\n")
 		flag.PrintDefaults()
 	}
 
