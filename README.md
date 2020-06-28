@@ -63,7 +63,7 @@ Killer is a basic Go project and doesn't require anything special to build, just
 standard library.
 
 ```
-git clone git@github.com:tshlabs/killer.git && cd killer
+git clone git@github.com:56quarters/killer.git && cd killer
 go build
 ./killer 1
 ```
